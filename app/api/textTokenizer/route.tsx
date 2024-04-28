@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     if (!text) {
       return NextResponse.json({
-        message: "No text provided.",
+        message: "Missing Field.",
         status: 400,
       });
     }

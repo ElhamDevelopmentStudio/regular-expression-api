@@ -5,10 +5,9 @@ function checkPasswordStrength(password: string): {
   strength: string;
   suggestions: string[];
 } {
-  // Define password strength levels
   const strengthLevels = ["Very Weak", "Weak", "Fair", "Strong", "Very Strong"];
 
-  // Define minimum requirements
+  // minimum requirements
   const requirements = {
     minLowercase: 1,
     minUppercase: 1,
@@ -16,43 +15,37 @@ function checkPasswordStrength(password: string): {
     minSpecialChars: 1,
   };
 
-  // Initialize suggestions array
   const suggestions: string[] = [];
 
-  // Check password length
   if (password.length < 8) {
     suggestions.push(`Password should contain at least 8 characters.`);
   }
 
-  // Check for lowercase letters
   if (!password.match(/[a-z]/)) {
     suggestions.push(
       `Password should contain at least ${requirements.minLowercase} lowercase letter.`
     );
   }
 
-  // Check for uppercase letters
   if (!password.match(/[A-Z]/)) {
     suggestions.push(
       `Password should contain at least ${requirements.minUppercase} uppercase letter.`
     );
   }
 
-  // Check for numbers
   if (!password.match(/\d/)) {
     suggestions.push(
       `Password should contain at least ${requirements.minNumbers} number.`
     );
   }
 
-  // Check for special characters
   if (!password.match(/[!@#$%^&*(),.?":{}|<>]/)) {
     suggestions.push(
       `Password should contain at least ${requirements.minSpecialChars} special character.`
     );
   }
 
-  // Determine password strength based on the number of unmet requirements
+  // Determine password strength based on the number of UnValidated requirements
   const unmetRequirementsCount = suggestions.length;
   const strengthIndex = Math.max(
     0,

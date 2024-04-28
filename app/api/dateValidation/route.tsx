@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parse } from "date-fns";
 
-// Function to determine the format of the given date string
 function determineDateFormat(dateString: string): string | null {
   const formats = ["MM/dd/yyyy", "dd/MM/yyyy", "yyyy-MM-dd"];
   for (const formatStr of formats) {
@@ -10,11 +9,9 @@ function determineDateFormat(dateString: string): string | null {
       if (!isNaN(parsedDate.getTime())) {
         return formatStr;
       }
-    } catch (error) {
-      // Ignore parsing errors and continue to the next format
-    }
+    } catch (error) {}
   }
-  return null; // Unable to determine format
+  return null;
 }
 
 export async function POST(request: NextRequest) {
@@ -22,10 +19,9 @@ export async function POST(request: NextRequest) {
   const { dateString } = body;
 
   if (!dateString) {
-    return new NextResponse("Internal Sever Error", { status: 500 });
+    return NextResponse.json({ message: "Internal Sever Error", status: 500 });
   }
 
-  // Determine the format of the given date string
   const detectedFormat = determineDateFormat(dateString);
   if (!detectedFormat) {
     return NextResponse.json({
@@ -37,7 +33,7 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({
     isValid: true,
-    message: "The given date is indeed a valid format",
+    message: "Success!",
     format: detectedFormat,
     status: 200,
   });

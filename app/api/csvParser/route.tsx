@@ -1,22 +1,20 @@
-// api/csvParser/route.tsx
-
 import { NextRequest, NextResponse } from "next/server";
 
-// Function to validate CSV data structure
 function validateCSV(csvData: string): boolean {
   // Split CSV data into lines
-  const lines = csvData.trim().split("\n");
+  const lines = csvData.trim().split("\n"); // In here we are enforcing a rule in the language saying everytime you see a \n divide the into different lines. this is a regular expression rule.
 
   // Check if there are at least two lines (header + data)
   if (lines.length < 2) {
+    // This is also a regular expression rule to check the length of the lines in data.
     return false;
   }
 
   // Split the first line (header) into columns
-  const headerColumns = lines[0].split(",");
+  const headerColumns = lines[0].split(","); // Yet another regular expression rule for splitting the headers.
 
   // Check if the header contains the expected columns
-  const expectedHeader = ["Name", "Email", "Phone"];
+  const expectedHeader = ["Name", "Email", "Phone"]; // The specific headers of csv also is a regular expression rule.
   if (
     headerColumns.length !== expectedHeader.length ||
     !headerColumns.every(
@@ -25,8 +23,6 @@ function validateCSV(csvData: string): boolean {
   ) {
     return false;
   }
-
-  // You can add more validation logic here if needed
 
   return true;
 }
@@ -52,14 +48,13 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // If validation passes, you can proceed with parsing the CSV data
-    // For now, we'll return a success response
+    // If validation passes, then you just say that data is valid.
     return NextResponse.json({
       message: "CSV data is valid.",
       status: 200,
     });
   } catch (error) {
-    console.error("Error parsing JSON:", error);
+    console.error("ERROR PARSING JSON:", error);
     return NextResponse.json({
       message: "Invalid JSON payload.",
       status: 400,
