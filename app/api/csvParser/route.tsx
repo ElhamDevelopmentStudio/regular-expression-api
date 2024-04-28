@@ -31,11 +31,7 @@ function validateCSV(csvData: string): boolean {
   return true;
 }
 
-export default async function handler(request: NextRequest) {
-  if (request.method !== "POST") {
-    return new NextResponse("Method Not Allowed", { status: 405 });
-  }
-
+export async function POST(request: NextRequest) {
   const requestBody = await request.text();
 
   try {
