@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import fetch from "node-fetch";
 import { URL } from "url";
 
-// Function to extract URLs from text
 function extractUrls(text: string): string[] {
   const urlRegex =
     /(https?:\/\/[^\s<>"]+|\b(www\.[^\s<>"]+))(?:\?(?:[^\s<>"]+))?(?:#[^\s<>"]+)?/g;
@@ -13,9 +12,7 @@ function extractUrls(text: string): string[] {
 async function validateUrls(urls: string[]): Promise<boolean[]> {
   const validationPromises = urls.map(async (url) => {
     try {
-      // Parse the URL
       const parsedUrl = new URL(url);
-      // Construct the base URL without path
       const baseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
       // Fetch the base URL to validate the URL
       const response = await fetch(baseUrl);

@@ -70,7 +70,6 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  // Check password strength
   const { strength, suggestions } = checkPasswordStrength(password);
 
   return NextResponse.json({

@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    // Create regular expression object with specified pattern and flags
     const regex = new RegExp(pattern, flags);
 
     // Perform the replacement with the specified text and pattern
