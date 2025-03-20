@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Function to check password strength and provide feedback
 function checkPasswordStrength(password: string): {
   strength: string;
   suggestions: string[];
 } {
   const strengthLevels = ["Very Weak", "Weak", "Fair", "Strong", "Very Strong"];
 
-  // minimum requirements
   const requirements = {
     minLowercase: 1,
     minUppercase: 1,
@@ -45,7 +43,6 @@ function checkPasswordStrength(password: string): {
     );
   }
 
-  // Determine password strength based on the number of UnValidated requirements
   const unmetRequirementsCount = suggestions.length;
   const strengthIndex = Math.max(
     0,
